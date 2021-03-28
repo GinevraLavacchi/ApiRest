@@ -1,0 +1,34 @@
+body {
+    background-color: rgb(255, 255, 255);
+}
+
+.card {
+    background-color: rgb(230, 230, 230);
+    width: 1000px;
+}
+
+.titolo {
+    background-color: rgb(48, 65, 95);
+    color: white;
+    padding-top: 2px;
+}
+
+.body {
+    width: 90%;
+    height: 70%;
+    padding-left: 15px;
+}
+
+.Ttabella {
+    border-top: solid 0.1px grey;
+    text-align: left;
+    align-items: left;
+}
+
+.l {
+    width: 250px;
+}
+
+.action {
+    width: 50px;
+}
