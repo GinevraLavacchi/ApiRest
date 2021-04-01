@@ -1,5 +1,6 @@
-$(document).ready(function() {
-	
+var counter=1;
+function start()
+{
     $.ajax({
     	url: 'http://localhost:8080/api/tutorial/1.0/employees',
       type: 'get',
@@ -7,7 +8,7 @@ $(document).ready(function() {
       success: function(data, textstatus, jQxhr){
         
         var dataDefault = data;
-        
+        // var ciccio='cioa';
             var employee_data = '';
             $.each(data, function(key, value){
               employee_data += '<tr>';
@@ -20,6 +21,7 @@ $(document).ready(function() {
               employee_data += '<td><button class="btn btn"><img onClick="deleteCheck()" src="img/removebutton.png" style="width: 30px; height: 30px;"></button></td>';  
              
               employee_data += '<tr>';
+              counter++;
             });
             $('#employee_table').append(employee_data);
         
@@ -28,6 +30,11 @@ $(document).ready(function() {
       	console.log (errorThrown);
       }
     });
+}
+
+$(document).ready(function() {
+	start();
+    
 });
 
 function deleteCheck() {
@@ -35,23 +42,10 @@ function deleteCheck() {
         $(this).closest('tr').remove();
     });
 }
-function mainadd() {
-    
-    var name = prompt("Please enter your name:", "");
-    var email = prompt("Please enter your email:", "");
-    var address = prompt("Please enter your address:", "");
-    var phone = prompt("Please enter your phone:", "");
-
-    var append = '<td><input class="form-check-input" type="checkbox" name="checkbox" ></td><td><p>'+name+'</p></td><td><p>'+email+'</p></td><td class="l"><p>'+address+'</p></td><td><p>'+phone+'</p></td>';
-    append = append + '<td><button class="btn btn"><img onClick="modify()" src="img/editbutton.png" style="width: 30px; height: 30px;"></button></td>';
-    append = append + '<td><button class="btn btn"><img onClick="deleteCheck()" src="img/removebutton.png" style="width: 30px; height: 30px;"></button></td>';
-    const tr = document.createElement('tr');
-    var appo = document.getElementsByName('checkbox');
-    tr.id = (tr + appo.length);
-    tr.innerHTML = append;
-    document.getElementById('body').appendChild(tr);
+function showForm()
+{
+    document.getElementById("form").style.display="block";
 }
-
 
 function checkboxall(maincheckbox) {
     var appo = document.getElementsByName('checkbox');
@@ -66,4 +60,34 @@ function modify()
         $(this).closest('tr').remove();
         mainadd();
     });
+}
+
+function newEmployee(){
+    let form=document.createElement("div");
+    form.innerHTML='<label for="firstName">First name: </label>\
+        <input type="text" id="firstName" placeholder="First name" />\
+        <label for="lastName">Last name: </label>\
+        <input type="text" id="lastName" placeholder="Last name" />\
+        <label for="email">Email: </label>\
+        <input type="text" id="email" placeholder="Email"/>\
+        <label for="phone">Phone: </label>\
+        <input type="text" id="phone" placeholder="Phone"/>\
+        <div>\
+            <button id="save" onclick="saveEmployee()">Save</button>\
+        </div>';
+    document.body.appendChild(form);
+}
+
+function saveEmployee(){
+    let req=new XMLHttpRequest();
+    let employee=new Object();
+    employee.firstName=document.getElementById("firstName").value;
+    employee.lastName=document.getElementById("lastName").value;
+    employee.email=document.getElementById("email").value;
+    employee.phone=document.getElementById("phone").value;
+    req.open("POST","http://localhost:8080/api/tutorial/1.0/employees",true);
+    employee.employeeId=counter;
+    req.setRequestHeader("content-type","application/json");
+    req.send(JSON.stringify(employee));
+    location.reload();
 }

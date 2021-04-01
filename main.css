@@ -32,3 +32,6 @@ body {
 .action {
     width: 50px;
 }
+#form{
+    display:none;
+}
