@@ -64,17 +64,18 @@ function modify()
 
 function newEmployee(){
     let form=document.createElement("div");
-    form.innerHTML='<label for="firstName">First name: </label>\
-        <input type="text" id="firstName" placeholder="First name" />\
-        <label for="lastName">Last name: </label>\
-        <input type="text" id="lastName" placeholder="Last name" />\
-        <label for="email">Email: </label>\
-        <input type="text" id="email" placeholder="Email"/>\
-        <label for="phone">Phone: </label>\
-        <input type="text" id="phone" placeholder="Phone"/>\
-        <div>\
-            <button id="save" onclick="saveEmployee()">Save</button>\
-        </div>';
+    
+    form.innerHTML='<div id="form"><fieldset><label for="firstName">First name: </label>\
+        <input type="text" id="firstName" placeholder="First name" /></fieldset>\
+        <fieldset><label for="lastName">Last name: </label>\
+        <input type="text" id="lastName" placeholder="Last name" /></fieldset>\
+        <fieldset><label for="email">Email: </label>\
+        <input type="text" id="email" placeholder="Email"/></fieldset>\
+        <fieldset><label for="phone">Phone: </label>\
+        <input type="text" id="phone" placeholder="Phone"/></fieldset>\
+        <fieldset>\
+            <button class="btn btn-success" id="save" onclick="saveEmployee()">Save</button>\
+        </fieldset></div>';
     document.body.appendChild(form);
 }
 
